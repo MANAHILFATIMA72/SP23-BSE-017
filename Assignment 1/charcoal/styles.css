@@ -1,0 +1,256 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrolling */
+}
+/* Navbar styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+}
+
+/* Icon logo (the small logo on the left) */
+.logo .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    filter: brightness(0) invert(1);
+}
+
+/* Text logo */
+.logo .text-logo {
+    width: 140px;
+    filter: brightness(0) invert(1);
+}
+
+/* Navigation menu styling */
+.nav-menu {
+    display: flex;
+    gap: 2em;
+    list-style-type: none;
+    align-items: center;
+    flex-grow: 1;
+    padding: 10px 20px;
+}
+
+/* Individual menu items */
+.nav-menu li {
+    display: inline-flex;
+    align-items: center;
+    position: relative; /* Position relative for absolute dropdown */
+}
+
+/* Align text and chevron closely */
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 15px 10px;
+    position: relative;
+    font-weight: bold;
+    display: flex; /* Ensures chevron stays close to text */
+    align-items: center; /* Vertically align text and icon */
+}
+
+/* Position the chevron icon directly next to the text */
+.nav-menu li .fa-chevron-down {
+    font-size: 12px; /* Size of dropdown icon */
+    filter: brightness(0) invert(1); /* Make icon visible */
+    position: relative;
+    top: 0; /* Align properly with the text */
+}
+
+/* Dropdown menu styling */
+.dropdown {
+    display: none; /* Hide dropdown by default */
+    position: absolute; /* Position absolute to the parent li */
+    top: 100%; /* Position below the parent */
+    left: 0;
+    background-color: #333; /* Background color for dropdown */
+    min-width: 160px; /* Minimum width of the dropdown */
+    z-index: 1; /* Ensure dropdown is above other elements */
+}
+
+.dropdown li {
+    display: block; /* Make dropdown items block-level */
+}
+
+.dropdown a {
+    color: #fff; /* Color for dropdown links */
+    padding: 10px 15px; /* Padding for dropdown items */
+    text-decoration: none; /* No underline */
+    display: block; /* Make entire area clickable */
+}
+
+.dropdown a:hover {
+    background-color: #444; /* Change background on hover */
+}
+
+/* Show dropdown on hover */
+.nav-menu li:hover > .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+/* Right icons styling */
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+/* Search icon and bar */
+.fa-search,
+.fa-user,
+.fa-cart-shopping {
+    filter: brightness(0) invert(1);
+    font-size: 20px; /* Increase the size of the icons */
+}
+
+.fa-cart-shopping {
+    margin-right: 20px; /* Move cart icon away from the right */
+}
+
+/* Search toggle checkbox - hidden */
+.search-toggle {
+    display: none; /* Hide the checkbox */
+}
+
+/* Search bar styling */
+.search-bar {
+    display: none; /* Initially hide the search bar */
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Show the search bar when checkbox is checked */
+.search-toggle:checked + .search-icon + .search-bar {
+    display: block; /* Show the search bar */
+}
+
+#slideshow {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; /* Default background color */
+}
+
+.slide {
+    display: none; /* Hides all slides by default */
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Positioning for layering */
+    top: 0;
+    left: 0;
+    background-size: cover; /* Cover the entire slide area */
+    background-position: center; /* Center the background image */
+}
+
+/* Show the active slide */
+.slide:target {
+    display: block; /* Only the active slide is visible */
+}
+
+/* Controls */
+.controls {
+    position: absolute; /* Controls positioned over the slideshow */
+    bottom: 20px; /* Position at the bottom with some space */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for perfect centering */
+    display: flex;
+    justify-content: space-between; /* Space buttons apart */
+    width: 45%; /* Adjust width to control button layout */
+}
+
+/* Button styles */
+.button {
+    background-color: transparent; /* Make the background transparent */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size for button text */
+    color: white; /* All buttons text color set to white */
+    transition: font-weight 0.3s; /* Transition for font-weight change */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Bold the active button */
+.button:focus, .button:hover, .button:active {
+    font-weight: bold; /* Make the button bold when hovered or focused */
+}
+
+/* Make the active button bold based on the target */
+#slide1:target ~ .controls .button:nth-child(1),
+#slide2:target ~ .controls .button:nth-child(2),
+#slide3:target ~ .controls .button:nth-child(3),
+#slide4:target ~ .controls .button:nth-child(4),
+#slide5:target ~ .controls .button:nth-child(5),
+#slide6:target ~ .controls .button:nth-child(6) {
+    font-weight: bold; /* Make the active button bold */
+}
+
+/* Dots Navigation */
+.dots {
+    position: absolute; /* Positioning for dots */
+    right: 20px; /* Right margin */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    display: flex;
+    flex-direction: column; /* Stack dots vertically */
+    gap: 10px; /* Space between dots */
+}
+
+.dot {
+    width: 12px; /* Width of each dot */
+    height: 12px; /* Height of each dot */
+    background-color: gray; /* Default color for dots */
+    border-radius: 50%; /* Make them circular */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+/* Change the dot color when the slide is active */
+#slide1:target ~ .dots .dot:nth-child(1),
+#slide2:target ~ .dots .dot:nth-child(2),
+#slide3:target ~ .dots .dot:nth-child(3),
+#slide4:target ~ .dots .dot:nth-child(4),
+#slide5:target ~ .dots .dot:nth-child(5),
+#slide6:target ~ .dots .dot:nth-child(6) {
+    background-color: black; /* Active dot color */
+}
+
+/* Chat Icon Styles */
+.chat-icon {
+    position: fixed; /* Fixes the icon in place */
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px; /* Distance from the right */
+    z-index: 100; /* Ensure it is on top of other elements */
+    background-color: white; /* White background for the icon */
+    color: black; /* Black color for the icon and text */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for the icon and text */
+    display: flex; /* Flexbox for aligning items */
+    align-items: center; /* Center icon and text vertically */
+    gap: 5px; /* Space between icon and text */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    text-decoration: none; /* Remove underline from link */
+    font-family: lato, sans-serif; /* Change the font for the text */
+    font-size: 14px; /* Adjust font size if necessary */
+    font-weight: 600;
+    color: #5b5b5b;
+}
+
+/* Adjust the icon size */
+.fa-whatsapp {
+    font-size: 20px; /* Adjust icon size */
+}

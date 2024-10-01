@@ -1,0 +1,141 @@
+/* General styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+}
+
+/* Icon logo (the small logo on the left) */
+.logo .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    filter: brightness(0) invert(1);
+}
+
+/* Text logo */
+.logo .text-logo {
+    width: 140px;
+    filter: brightness(0) invert(1);
+}
+
+/* Navigation menu styling */
+.nav-menu {
+    display: flex;
+    gap: 2em;
+    list-style-type: none;
+    align-items: center;
+    flex-grow: 1;
+    padding: 10px 20px;
+}
+
+/* Individual menu items */
+.nav-menu li {
+    display: inline-flex;
+    align-items: center;
+    position: relative; /* Position relative for absolute dropdown */
+}
+
+/* Align text and chevron closely */
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 15px 10px;
+    position: relative;
+    font-weight: bold;
+    display: flex; /* Ensures chevron stays close to text */
+    align-items: center; /* Vertically align text and icon */
+}
+
+/* Position the chevron icon directly next to the text */
+.nav-menu li .fa-chevron-down {
+    font-size: 12px; /* Size of dropdown icon */
+    filter: brightness(0) invert(1); /* Make icon visible */
+    position: relative;
+    top: 0; /* Align properly with the text */
+}
+
+/* Dropdown menu styling */
+.dropdown {
+    display: none; /* Hide dropdown by default */
+    position: absolute; /* Position absolute to the parent li */
+    top: 100%; /* Position below the parent */
+    left: 0;
+    background-color: #333; /* Background color for dropdown */
+    min-width: 160px; /* Minimum width of the dropdown */
+    z-index: 1; /* Ensure dropdown is above other elements */
+}
+
+.dropdown li {
+    display: block; /* Make dropdown items block-level */
+}
+
+.dropdown a {
+    color: #fff; /* Color for dropdown links */
+    padding: 10px 15px; /* Padding for dropdown items */
+    text-decoration: none; /* No underline */
+    display: block; /* Make entire area clickable */
+}
+
+.dropdown a:hover {
+    background-color: #444; /* Change background on hover */
+}
+
+/* Show dropdown on hover */
+.nav-menu li:hover > .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+/* Right icons styling */
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+/* Search icon and bar */
+.fa-search,
+.fa-user,
+.fa-cart-shopping {
+    filter: brightness(0) invert(1);
+    font-size: 20px; /* Increase the size of the icons */
+}
+
+.fa-cart-shopping {
+    margin-right: 20px; /* Move cart icon away from the right */
+}
+
+/* Search toggle checkbox - hidden */
+.search-toggle {
+    display: none; /* Hide the checkbox */
+}
+
+/* Search bar styling */
+.search-bar {
+    display: none; /* Initially hide the search bar */
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Show the search bar when checkbox is checked */
+.search-toggle:checked + .search-icon + .search-bar {
+    display: block; /* Show the search bar */
+}
