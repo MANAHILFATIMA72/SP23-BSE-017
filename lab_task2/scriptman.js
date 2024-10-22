@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const productsList = document.getElementById('productsList');
     
+    // Fetch and display products (Read)
     function fetchProducts() {
         fetch('https://fakestoreapi.com/products')
             .then(response => response.json())
             .then(data => {
-                productsList.innerHTML = ''; 
+                productsList.innerHTML = '';  // Clear the current list
                 data.forEach(product => {
                     const li = document.createElement('li');
                     li.setAttribute('data-id', product.id);
@@ -15,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    fetchProducts(); 
+    fetchProducts(); // Initial load of products
 
+    // Create Product (Create)
     document.getElementById('createProductForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const title = document.getElementById('createTitle').value;
@@ -40,10 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
             li.setAttribute('data-id', data.id);
             li.innerHTML = `ID: ${data.id}, Title: ${data.title}, Price: $${data.price}, Description: ${data.description}`;
             productsList.appendChild(li);
-            document.getElementById('createProductForm').reset(); 
+            document.getElementById('createProductForm').reset();  // Clear form
         });
     });
 
+    // Update Product (Update)
     document.getElementById('updateProductForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const id = document.getElementById('updateId').value;
@@ -67,11 +70,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const li = productsList.querySelector(`[data-id='${id}']`);
             if (li) {
                 li.innerHTML = `ID: ${data.id}, Title: ${data.title}, Price: $${data.price}, Description: ${data.description}`;
-                document.getElementById('updateProductForm').reset(); 
+                document.getElementById('updateProductForm').reset();  // Clear form
             }
         });
     });
 
+    // Delete Product (Delete)
     document.getElementById('deleteProductForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const id = document.getElementById('deleteId').value;
@@ -83,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(() => {
             const li = productsList.querySelector(`[data-id='${id}']`);
             if (li) {
-                productsList.removeChild(li); 
-                document.getElementById('deleteProductForm').reset();
+                productsList.removeChild(li);  // Remove from the display
+                document.getElementById('deleteProductForm').reset();  // Clear form
             }
         });
     });
