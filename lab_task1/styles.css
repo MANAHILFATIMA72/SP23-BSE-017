@@ -1,0 +1,129 @@
+.navbar{
+    padding: 15px;
+    background-color: transparent !important;
+}
+
+.navbar .navbar-brand{
+    filter: brightness(0) invert(1);
+}
+
+
+#navbarSupportedContent{
+    padding-top: 8px;
+}
+
+.navbar .nav-link, 
+.navbar .navbar-brand, 
+.navbar .dropdown-toggle {
+    color: white !important;
+}
+
+.navbar-toggler {
+    border-color: white; 
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+.navbar .dropdown-menu {
+    background-color: #222323; 
+}
+
+.navbar .dropdown-item:hover {
+    background-color: gray !important; 
+    color: white !important; 
+}
+
+
+.navbar .dropdown-item {
+    color: white !important;
+}
+
+
+.fa-search,
+.fa-user,
+.fa-cart-shopping {
+    filter: brightness(0) invert(1);
+    font-size: 15px;
+    padding-right: 25px;
+}
+
+.Newsletter_section {
+    width: 100%;
+    padding: 10px 48px 57px 48px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.Newsletter_content {
+    width: 40%;
+}
+
+.h10 {
+    font-family: "sans sarif", "times new roman";
+    font-size: 28px;
+    color: #3f4242;
+    font-weight: lighter;
+    margin: 10px;
+    padding: 20px;
+}
+
+.email {
+    width: 60%;
+    padding: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 0.1px solid grey;
+    filter: opacity(0.5);
+}
+
+.fa-sharp {
+    padding-right: 8px;
+}
+
+.Subscribe {
+    padding: 18px 25px;
+    border: none;
+    background-color: #222323;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.h11, a {
+    color: rgb(177, 176, 176);    
+    text-decoration: none; 
+    padding-bottom: 7px;
+}
+
+a:hover{
+    color: white;
+}
+
+.bold {
+    font-weight: bold; 
+    color: white;
+    padding-bottom: 7px;
+}
+
+.custom-icon-size {
+    font-size: 1.5rem; 
+}
+
+.copyright{
+    padding-bottom: 70px;
+    color: rgb(177, 176, 176); 
+}
+
+.payment-logo{
+    width: 40px;
+    height: 27px;
+    padding-left: 7px;
+    padding-bottom: 5px;
+    border-radius: 2px;
+}
+
