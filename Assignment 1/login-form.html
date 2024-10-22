@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            margin-top: 5%;
+            background-color: #f7f4f4;
+            padding: 2rem;
+            width: 50%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2{
+            font-size: 28px;
+            color: #222323;
+            font-weight: 500;
+        }
+
+        .login-container h2 {
+            margin-bottom: 3rem;
+            /* width: 100%; */
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            width: 400px;
+        }
+
+
+        .input-group input {
+            width: 100%;
+            padding: 1.5rem;
+            border: 1px solid #a5a3a3;
+            background-color: transparent;
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        .input-group input:focus {
+            /* border-color: #e72424; */
+            outline: none;
+        }
+
+        .forgot-password {
+            text-align: left;
+            margin-bottom: 1rem;
+            padding-bottom: 15px;
+
+        }
+
+        .forgot-password a {
+            text-decoration: none;
+            color: #c1c1c2;
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 450px;
+            padding: 1rem;
+            background-color: #ea4c40;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ef6d6d;
+        }
+
+        .sign-up {
+            margin-top: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sign-up a {
+            text-decoration: none;
+            color: #c1bebe;
+            text-decoration: underline;
+           
+        }
+
+        .sign-up a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ribbon">
+        <div class="animation">
+            <div class="ribbon-items" id="r-item1">
+                <ul>
+                    <li class="items">
+                        Customer Support ( MON-SUN : 10AM TO 1 AM )
+                    </li>
+                </ul>
+            </div>
+            <div class="ribbon-items" id="r-item2">
+                <ul>
+                    <li class="items">
+                        Orders worth RS 20,000/-or more and Self collection parcels will be paid online in Advance
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="header">
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="charcoalicon.png" alt="Charcoal Logo" width="50" height="50" class="icon">
+                    <img src="charcoal (2).png" alt="Charcoal Text Logo" class="text-logo">
+                </div>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#" class="dropdown-toggle">COLLECTIONS</a>
+                        <i class="fa fa-chevron-down"></i> <!-- Chevron icon for Collections -->
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#" class="dropdown-toggle">Winter</a>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul class="dropdown">
+                                    <li><a href="#">Long Coats</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Sweat Shirts</a></li>
+                                    <li><a href="#">Hoodies</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Fragrances</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle">Summer Splash</a>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul class="dropdown">
+                                    <li><a href="#">Polo & Tees</a></li>
+                                    <li><a href="#">Casual Shirts</a></li>
+                                    <li><a href="#">Smart Shirts</a></li>
+                                    <li><a href="#">Semi Formal Shirts</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle">Shirts</a>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul class="dropdown">
+                                    <li><a href="#">Limited Edition Shirts</a></li>
+                                    <li><a href="#">Polo & Tees</a></li>
+                                    <li><a href="#">Casual Shirts</a></li>
+                                    <li><a href="#">Dress Shirts</a></li>
+                                    <li><a href="#">Semi Casual Shirts</a></li>
+                                    <li><a href="#">Smart Shirts</a></li>
+                                    <li><a href="#">Half Sleeve Shirts</a></li>
+                                    <li><a href="#">Full Sleeve Shirts</a></li>
+                                    <li><a href="#">Semi Formal Shirts</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Suiting</a>
+                            </li>
+                            <li>
+                                <a href="#">Semi Formal Coats</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle">Riwayat-e-Rang-Afroz</a>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul class="dropdown">
+                                    <li><a href="#">Prince Coats</a></li>
+                                    <li><a href="#">Waist Coats</a></li>
+                                    <li><a href="#">Kurta</a></li>
+                                    <li><a href="#">Afroz Shalwar Kameez</a></li>
+                                    <li><a href="#">Kurta Pjama</a></li>
+                                    <li><a href="#">Afroz Trouser/Shalwar</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle">Bottoms</a>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul class="dropdown">
+                                    <li><a href="#">Dress Pants</a></li>
+                                    <li><a href="#">Casual Pants</a></li>
+                                    <li><a href="#">Jeans</a></li>
+                                    <li><a href="#">Casual Trouser</a></li>
+                                    <li><a href="#">Casual Shorts</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">ACCESSORIES</a>
+                        <i class="fa fa-chevron-down"></i> <!-- Chevron icon for Accessories -->
+                        <ul class="dropdown">
+                            <li><a href="#">Caps</a></li>
+                            <li><a href="#">Scarfs</a></li>
+                            <li><a href="#">Gift Boxes</a></li>
+                            <li><a href="#">Tie Box Set</a></li>
+                            <li><a href="#">Lapel Pin</a></li>
+                            <li><a href="#">Cufflinks</a></li>
+                            <li><a href="#">Wallets</a></li>
+                            <li><a href="#">Bow Tie</a></li>
+                            <li><a href="#">Belts</a></li>
+                            <li><a href="#">Socks</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">CLEARANCE SALE</a>
+                    </li>
+                </ul>
+                <div class="right-icons">
+                    <a href="http://127.0.0.1:5500/Project/search.html"><i class="fa fa-search"></i></a>
+                        <a href="http://127.0.0.1:5500/Project/login-form.html"><i class="fa fa-user"></i></a>
+                    <i class="fa fa-cart-shopping"></i>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="E-mail" >
+                <div id="emailError" class="error"></div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password">
+                <div id="passwordError" class="error"></div>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot your password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="sign-up">
+            <a href="http://127.0.0.1:5500/Project/Sign-up-form.html">Sign up</a>
+        </div>
+    </div>
+
+
+    <div class="section">
+        <div id="content1" class="section_content">
+            <div>
+                <i class="fa-sharp-duotone fa-solid fa-truck-fast"></i>
+            </div>
+            <div>
+                <p id="h4">Free shipping</p>
+                <p id="h5">Get free shipping on order RS.4000</p>
+            </div>
+        </div>
+
+        <div id="content2" class="section_content">
+            <div>
+                <i class="fa-solid fa-headphones"></i>
+            </div>
+            <div>
+                <p id="h6">Customer service</p>
+                <p id="h7">Call us Monday to Friday. Whatsapp us on Weekends for your queries!</p>
+            </div>
+        </div>
+
+        <div id="content3" class="section_content">
+            <div>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div>
+                <p id="h8">Secure Payment</p>
+                <p id="h9">Visa, Mastercard & Cash on deliervery are accepted</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="Newsletter_section">
+        <div class="Newsletter_content">
+            <h2 class="h10">Subscribe to Newsletter</h2>
+            <div class="email_holder">
+                <input type="text" placeholder="E-mail" class="email">
+                <button type="submit" value="Subscribe" class="Subscribe">
+                    <i class="fa-sharp fa-regular fa-envelope-open"></i>Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bar">
+            <div class="footer-block">
+                <div class="bold">
+                    <p>Sales Support</p>
+                </div>
+                <div class="h11">
+                    <p>
+                        Email: <a href="mailto:onlinesales@charcoal.com.pk">onlinesales@charcoal.com.pk</a>
+                    </p>
+                </div>
+                <div class="h11">
+                    <p>
+                        Phone: <a href="tel: +923454663833"> (92)-345-4663833</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-block">
+                <div class="bold">
+                    <p>Customer Care</p>
+                </div>
+                <div class="h11">
+                    <p>
+                        Email: <a href="mailto:customercare@charcoal.com.pk">customercare@charcoal.com.pk</a>
+                    </p>
+                </div>
+                <div class="h11">
+                    <p>
+                        Phone: <a href="tel: +923116334445"> (92)-311-6334445</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-block">
+                <div class="bold">
+                    <p>About our store</p>
+                </div>
+                <div class="h11">
+                    <p>
+                        <a href="http://127.0.0.1:5500/Project/store_locator.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/store_locator.html">Store Locator</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/FAQs.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/FAQs.html">FAQ's</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/Return_Exchange.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/Return_Exchange.html">Return Exchange Policy</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/About_us.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/About_us.html">About us</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/Terms_conditions.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/Terms_conditions.html">Terms Conditions</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/charcoal_sewing.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/charcoal_sewing.html">Charcoal Sewing</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/Size_guide.html.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/Size_guide.html">Size Guide</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/All_products.html.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/All_products.html">All Products</a>
+                        -
+                        <a href="http://127.0.0.1:5500/Project/Fabric_Care.html" target="_blank"
+                            title="http://127.0.0.1:5500/Project/Fabric_Care.html">Fabric Care</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-icons">
+            <ul class="ul-1">
+                <li class="li-1">
+                    <a href="https://www.facebook.com/charcoal.officialpage" class="tap-area" target="_blank"
+                        aria-label="Follow on facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                </li>
+
+                <li class="li-1">
+                    <a href="https://www.instagram.com/charcoal.official/" class="tap-area" target="_blank"
+                        aria-label="Follow on instagram"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+
+                <li class="li-1">
+                    <a href="https://www.pinterest.com/charcoalmensclothing/?invite_code=5029378e73214b60b5f1cdea86a4a804&sender=1025835758780562980"
+                        class="tap-area" target="_blank" aria-label="Follow on pinterest"><i
+                            class="fa-brands fa-pinterest-p"></i></a>
+                </li>
+
+                <li class="li-1">
+                    <a href="https://www.youtube.com/channel/UCcGfg_hMug9geH9E6pJ21og" class="tap-area" target="_blank"
+                        aria-label="Follow on youtube"><i class="fa-brands fa-youtube"></i></a>
+                </li>
+
+                <li class="li-1">
+                    <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQHiCDQCYydqfgAAAZKXDSi4M3nQ8v3_Fy75VQ3nQQAc66r7PWaVlNSiM6sjgHtTso_AJ-vpnOS0JBb3K"
+                        class="tap-area" target="_blank" aria-label="Follow on linkedin"><i
+                            class="fa-brands fa-linkedin-in"></i></a>
+                </li>
+
+                <li class="li-1">
+                    <a href="https://api.whatsapp.com/send?phone=923454663833" class="tap-area" target="_blank"
+                        aria-label="Follow on whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="copyright-section">
+            <div class="copyright">
+                <p class="copyright-textbox">
+                    © 2024, Charcoal Clothing.
+                    <br>
+                    <a href="https://itbrain.com.pk/">Powered by IT Brain</a>
+                </p>
+            </div>
+
+            <div class="payment-logo">
+                <img src="visa-card.png" alt="visa-card" class="visa-card">
+                <img src="Mastercard-Logo.png" alt="Mastercard" class="Mastercard">
+            </div>
+
+        </div>
+
+        <div class="chatbox">
+            <a href="https://wa.me/15551234567" class="chat" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            document.querySelectorAll('.error').forEach(function(el) {
+                el.textContent = '';
+            });
+    
+            let isValid = true;
+    
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+    
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'Email is required.';
+                isValid = false;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+    
+            if (password === '') {
+                document.getElementById('passwordError').textContent = 'Password is required.';
+                isValid = false;
+            } else if (password.length < 8) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 8 characters long.';
+                isValid = false;
+            }
+    
+            if (isValid) {
+                alert('Login successful!');
+            }
+        });
+    </script>
+</body>
+
+</html>
