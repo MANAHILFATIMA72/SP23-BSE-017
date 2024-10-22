@@ -6,6 +6,15 @@
     <title>Resume - Kim Chun Hei</title>
     <link rel="stylesheet" href="resume.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Other CSS styles */
+        .fixed {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
     <div class="resume-container">
@@ -20,6 +29,13 @@
                 <p><strong>Email:</strong> manahilfatima39735@gmail.com</p>
                 <p><strong>Website:</strong> Charcoal clothing</p>
             </div>
+        </div>
+        <div class="contact" >
+            <h1>Manahil Fatima</h1>
+            <p class="job-title"><i>Software Engineer</i></p>
+            <p><strong><i class="fa-solid fa-phone"></i>Phone:</strong> 0345-5850839</p>
+            <p><strong>Email:</strong> manahilfatima39735@gmail.com</p>
+            <p><strong>Website:</strong> Charcoal clothing</p>
         </div>
         <div class="content-box">
             <div class="content">
@@ -42,9 +58,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="line">
-
-            </div>
+            <div class="line"></div>
             <div class="Qualification">
                 <h2>Education:</h2>
                 <h3>Comsats University Islamabad, Lahore Campus</h3>
@@ -62,10 +76,17 @@
         </div>
     </div>
 
-    <div class="intro-box" id="introBox">
-        <p>Hi, I'm Kim Chun Hei, a graphics designer with 6 years of experience in web design and creative processes. I'm passionate about using design to communicate impactful stories.</p>
-    </div>
-
-    <script src="script.js"></script>
+    <script>
+        const profile = document.querySelector('.photo img');
+        const introduction = document.querySelector('.contact');
+        
+        profile.addEventListener('mouseenter', function() {
+            introduction.classList.add('fixed');
+        });
+        
+        profile.addEventListener('mouseleave', function() {
+            introduction.classList.remove('fixed');
+        });
+    </script>
 </body>
 </html>
