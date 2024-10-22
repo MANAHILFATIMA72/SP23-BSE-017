@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD with Fake Store API</title>
+    <link rel="stylesheet" href="styleman.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CRUD with Fake Store API</h1>
+
+        <section>
+            <h2>Create Product</h2>
+            <form id="createProductForm">
+                <input type="text" id="createTitle" placeholder="Product Title" required>
+                <input type="text" id="createPrice" placeholder="Price" required>
+                <input type="text" id="createDescription" placeholder="Description" required>
+                <button type="submit">Create Product</button>
+            </form>
+        </section>
+    
+        <section>
+            <h2>Products List</h2>
+            <ul id="productsList"></ul>
+        </section>
+    
+        <section>
+            <h2>Update Product</h2>
+            <form id="updateProductForm">
+                <input type="number" id="updateId" placeholder="Product ID" required>
+                <input type="text" id="updateTitle" placeholder="Updated Title" required>
+                <input type="text" id="updatePrice" placeholder="Updated Price" required>
+                <input type="text" id="updateDescription" placeholder="Updated Description" required>
+                <button type="submit">Update Product</button>
+            </form>
+        </section>
+    
+        <section>
+            <h2>Delete Product</h2>
+            <form id="deleteProductForm">
+                <input type="number" id="deleteId" placeholder="Product ID" required>
+                <button type="submit">Delete Product</button>
+            </form>
+        </section>
+    
+    </div>
+    
+    <script src="scriptman.js"></script>
+</body>
+</html>
