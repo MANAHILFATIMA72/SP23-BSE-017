@@ -1,0 +1,32 @@
+.h11, a {
+    color: rgb(177, 176, 176);    
+    text-decoration: none; 
+    padding-bottom: 7px;
+}
+
+a:hover{
+    color: white;
+}
+
+.bold {
+    font-weight: bold; 
+    color: white;
+    padding-bottom: 7px;
+}
+
+.custom-icon-size {
+    font-size: 1.5rem; 
+}
+
+.copyright{
+    padding-bottom: 70px;
+    color: rgb(177, 176, 176); 
+}
+
+.payment-logo{
+    width: 40px;
+    height: 27px;
+    padding-left: 7px;
+    padding-bottom: 5px;
+    border-radius: 2px;
+}

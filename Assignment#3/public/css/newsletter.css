@@ -1,0 +1,44 @@
+.Newsletter_section {
+    width: 100%;
+    padding: 10px 48px 30px 48px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.Newsletter_content {
+    width: 40%;
+}
+
+.h10 {
+    font-family: "sans sarif", "times new roman";
+    font-size: 28px;
+    color: #3f4242;
+    font-weight: lighter;
+    margin: 10px;
+    padding: 20px;
+}
+
+.email {
+    width: 60%;
+    padding: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 0.1px solid grey;
+    filter: opacity(0.5);
+}
+
+.fa-sharp {
+    padding-right: 8px;
+}
+
+.Subscribe {
+    padding: 18px 25px;
+    border: none;
+    background-color: #222323;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
