@@ -1,0 +1,131 @@
+<style>
+ .btn {
+    padding: 5px 10px; /* Adjust padding */
+    font-size: 14px;   /* Adjust font size */
+  }
+  
+  .table td {
+    vertical-align: middle; /* Align content vertically */
+  }
+  .btn {
+    max-width: 100px; /* Adjust this value as needed */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Ensure no text overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  }
+</style>
+
+<div class="container mt-5">
+    <h1>Product Management</h1>
+    <a href="#addProductModal" class="btn btn-primary mb-3" data-bs-toggle="modal">Add Product</a>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach((product, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= product.name %></td>
+            <td>$<%= product.price.toFixed(2) %></td>
+            <td><%= product.description %></td>
+            <td><%= product.category ? product.category.name : 'No Category' %></td>
+            <td>
+                <a href="/admin/products/delete/<%= product._id %>" class="btn btn-danger btn-sm">Delete</a>
+                <button 
+                  class="btn btn-warning btn-sm" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#editProductModal-<%= product._id %>">
+                  Edit
+                </button>
+              </td>              
+          </tr>
+
+          <!-- Add Product Modal -->
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/products/create" method="POST">
+            <div class="mb-4">
+              <label for="productName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="productName" name="name" required>
+            </div>
+            <div class="mb-4">
+              <label for="productPrice" class="form-label">Price</label>
+              <input type="number" class="form-control" id="productPrice" name="price" step="0.01" required>
+            </div>
+            <div class="mb-4">
+              <label for="productDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="productDescription" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-4">
+              <label for="productCategory" class="form-label">Category</label>
+              <select class="form-control" id="productCategory" name="category" required>
+                <% categories.forEach((category) => { %>
+                  <option value="<%= category._id %>"><%= category.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+          <!-- Edit Product Modal -->
+          <div class="modal fade" id="editProductModal-<%= product._id %>" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/admin/products/edit/<%= product._id %>" method="POST">
+                    <div class="mb-3">
+                      <label for="productName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="productName" name="name" value="<%= product.name %>" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="productPrice" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="productPrice" name="price" value="<%= product.price %>" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="productDescription" class="form-label">Description</label>
+                      <textarea class="form-control" id="productDescription" name="description" rows="3" required><%= product.description %></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="productCategory" class="form-label">Category</label>
+                      <select class="form-control" id="productCategory" name="category" required>
+                        <% categories.forEach((category) => { %>
+                          <option value="<%= category._id %>" <%= product.category && product.category._id.toString() === category._id.toString() ? 'selected' : '' %>><%= category.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  
