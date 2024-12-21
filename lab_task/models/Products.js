@@ -1,4 +1,3 @@
-// models/product.js
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
@@ -9,4 +8,6 @@ const productSchema = new mongoose.Schema({
   image: { type: String, required: false },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+// Check if the model already exists before defining it
+module.exports = mongoose.models.Product || mongoose.model('Product', productSchema);
+

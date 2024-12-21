@@ -77,7 +77,8 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    background-color: #f7f7f7;
     max-width: 200px;
     z-index: 1;
     margin: 0;

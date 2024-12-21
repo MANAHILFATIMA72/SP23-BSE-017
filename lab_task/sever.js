@@ -32,8 +32,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts); // Use express-ejs-layouts for layout support
 
-app.set('layout', 'admin/layout');
+app.set('layout', '/layouts/main');
 
+const productRoutes = require('./routes/productRoutes');
+app.use('/', productRoutes);
 
 // Routes
 app.use('/admin', adminRoutes);
