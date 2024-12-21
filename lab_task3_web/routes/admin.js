@@ -20,6 +20,7 @@ router.get('/products', async (req, res) => {
   }
 });
 
+
 router.post('/products/create', async (req, res) => {
   try {
     const { name, price, description, category } = req.body; // 'category' is the selected category ID
@@ -46,6 +47,8 @@ router.post('/products/create', async (req, res) => {
   }
 });
 
+
+// Edit Product
 // Edit Product
 router.post('/products/edit/:id', async (req, res) => {
   try {
@@ -71,6 +74,7 @@ router.post('/products/edit/:id', async (req, res) => {
     res.status(500).send('Error editing product');
   }
 });
+
 
 
 
