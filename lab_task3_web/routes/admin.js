@@ -1,7 +1,7 @@
 const express = require('express');
 const Product = require('../models/products');
 const Category = require('../models/category');
-
+const upload = require('../middleware/multer'); 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -21,10 +21,11 @@ router.get('/products', async (req, res) => {
 });
 
 
-router.post('/products/create', async (req, res) => {
+router.post('/products/create',upload.single('image'), async (req, res) => {
   try {
     const { name, price, description, category } = req.body; // 'category' is the selected category ID
-
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
+    
     // Validate category ID
     const categoryDoc = await Category.findById(category);
     if (!categoryDoc) {
@@ -32,12 +33,7 @@ router.post('/products/create', async (req, res) => {
     }
 
     // Create new product
-    const product = new Product({
-      name,
-      price,
-      description,
-      category: categoryDoc._id,
-    });
+    const product = new Product({ name, price, description, category, image });
 
     await product.save();
     res.redirect('/admin/products');

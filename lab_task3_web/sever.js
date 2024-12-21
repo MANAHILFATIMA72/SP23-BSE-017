@@ -17,6 +17,7 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use('/uploads', express.static('public/uploads'));
 app.use(
   session({
     secret: 'secretKey',

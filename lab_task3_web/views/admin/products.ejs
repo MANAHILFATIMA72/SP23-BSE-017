@@ -26,6 +26,7 @@
         <th>Price</th>
         <th>Description</th>
         <th>Category</th>
+        <th>Image</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -37,6 +38,13 @@
           <td><%= product.price.toFixed(2) %></td>
           <td><%= product.description %></td>
           <td><%= product.category ? product.category.name : 'No Category' %></td>
+          <td>
+            <% if (product.image) { %>
+              <img src="<%= product.image %>" alt="Product Image" class="img-thumbnail" style="max-width: 100px;">
+            <% } else { %>
+              No Image
+            <% } %>
+          </td>
           <td>
             <button 
               class="btn btn-warning btn-sm" 
@@ -98,20 +106,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/admin/products/create" method="POST">
-          <div class="mb-3">
+        <form action="/admin/products/create" method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
             <label for="productName" class="form-label">Name</label>
             <input type="text" class="form-control" id="productName" name="name" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="productPrice" class="form-label">Price</label>
             <input type="number" class="form-control" id="productPrice" name="price" step="0.01" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="productDescription" class="form-label">Description</label>
             <textarea class="form-control" id="productDescription" name="description" rows="3" required></textarea>
           </div>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="productCategory" class="form-label">Category</label>
             <select class="form-control" id="productCategory" name="category" required>
               <% categories.forEach((category) => { %>
@@ -119,8 +127,12 @@
               <% }) %>
             </select>
           </div>
+          <div class="mb-4">
+            <label for="productImage" class="form-label">Image</label>
+            <input type="file" class="form-control" id="productImage" name="image" accept="image/*" required>
+          </div>
           <button type="submit" class="btn btn-primary">Add Product</button>
-        </form>
+        </form>        
       </div>
     </div>
   </div>
