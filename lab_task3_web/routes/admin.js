@@ -1,7 +1,7 @@
 const express = require('express');
 const Product = require('../models/products');
 const Category = require('../models/category');
-const upload = require('../middleware/multer'); 
+const upload = require('../middleware/multer');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -46,7 +46,7 @@ router.post('/products/create',upload.single('image'), async (req, res) => {
 
 // Edit Product
 // Edit Product
-router.post('/products/edit/:id', async (req, res) => {
+router.post('/products/edit/:id',upload.single('image'), async (req, res) => {
   try {
     const { id } = req.params;
     const { name, price, description, category } = req.body;
