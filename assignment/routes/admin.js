@@ -11,16 +11,16 @@ router.get('/', async (req, res) => {
 });
 
 // List Products
-router.get('/products', async (req, res) => {
-  try {
-    const products = await Product.find().populate('category');
-    const categories = await Category.find();
-    res.render('admin/products', {layout: "layouts/adminLayout", products, categories });
-  } catch (err) {
-    console.error('Error fetching products or categories:', err);
-    res.status(500).send('Error fetching products or categories');
-  }
-});
+// router.get('/products', async (req, res) => {
+//   try {
+//     const products = await Product.find().populate('category');
+//     const categories = await Category.find();
+//     res.render('admin/products', {layout: "layouts/adminLayout", products, categories });
+//   } catch (err) {
+//     console.error('Error fetching products or categories:', err);
+//     res.status(500).send('Error fetching products or categories');
+//   }
+// });
 
 
 router.post('/products/create',upload.single('image'), async (req, res) => {
@@ -38,15 +38,14 @@ router.post('/products/create',upload.single('image'), async (req, res) => {
     const product = new Product({ name, price, description, category, image });
 
     await product.save();
-    res.redirect('/admin/products');
+    const redirectUrl = `/admin/products?search=${req.query.search || ''}&category=${req.query.category || ''}&sort=${req.query.sort || ''}&order=${req.query.order || ''}`;
+res.redirect(redirectUrl);
   } catch (err) {
     console.error('Error saving product:', err);
     res.status(500).send('Error saving product');
   }
 });
 
-
-// Edit Product
 // Edit Product
 router.post('/products/edit/:id',upload.single('image'), async (req, res) => {
   try {
@@ -88,6 +87,49 @@ router.get('/products/delete/:id', async (req, res) => {
   }
 });
 
+router.get('/products', async (req, res) => {
+  try {
+    const search = req.query.search || '';
+    const categoryFilter = req.query.category || '';
+    const sort = req.query.sort || 'createdAt';
+    const order = req.query.order || 'asc';
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const query = {};
+    if (search) {
+      query.name = { $regex: search, $options: 'i' };
+    }
+    if (categoryFilter) {
+      query.category = categoryFilter;
+    }
+
+    const totalProducts = await Product.countDocuments(query);
+    const products = await Product.find(query)
+      .populate('category')
+      .sort({ [sort]: order === 'asc' ? 1 : -1 })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const categories = await Category.find();
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    res.render('admin/products', {
+      layout: "layouts/adminLayout",
+      products,
+      categories,
+      search,
+      category: categoryFilter,
+      sort,
+      order,
+      currentPage: page,
+      totalPages,
+    });
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 router.get('/categories', async (req, res) => {
