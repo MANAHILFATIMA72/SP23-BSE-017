@@ -1,0 +1,273 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.section {
+    display: flex;
+    color: black;
+    font-size: 15px;
+    font-family: sans-serif, Arial, Helvetica;
+    background-color: #f7f7f7;
+    padding: 56px 48px;
+    width: 100%;
+    height: 150px;
+    margin-top: 9%;
+    justify-content: space-evenly;
+}
+
+.section_content {
+    width: 27%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    filter: opacity(0.75);
+}
+
+.fa-sharp-duotone,
+.fa-solid {
+    font-size: 25px;
+}
+
+#h4,
+#h6,
+#h8 {
+    color: #222323;
+    font-family: Arial, "optima nova", "sans sarif";
+    font-size: 20px;
+
+}
+
+#h5,
+#h7,
+#h9 {
+    color: #565c5c;
+    font-family: arial, "sans sarif";
+    font-size: 14px;
+}
+
+.Newsletter_section {
+    width: 100%;
+    padding: 57px 48px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Newsletter_content {
+    width: 40%;
+}
+
+.h10 {
+    font-family: "sans sarif", "times new roman";
+    font-size: 28px;
+    color: #3f4242;
+    font-weight: lighter;
+}
+
+.email {
+    width: 60%;
+    padding: 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 0.1px solid grey;
+    filter: opacity(0.25);
+}
+
+.fa-sharp {
+    padding-right: 8px;
+}
+
+.Subscribe {
+    padding: 18px 25px;
+    border: none;
+    background-color: #222323;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+footer {
+    border: 2px solid black;
+    width: 100%;
+    height: 440px;
+    background-color: #222323;
+}
+
+.footer-bar {
+    padding: 10px;
+    height: 180px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-content: flex-start;
+    padding-left: 30px;
+}
+
+.footer-block {
+    padding: 10px;
+    width: 25%;
+    height: 150px;
+    margin-left: 1%;
+    margin-right: 4%;
+}
+
+.bold {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    /* font-family: 'Arial Narrow', sans-serif; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 1px;
+}
+
+.h11 {
+    color: #FFFFFFB3;
+    font-size: 15px;
+    line-height: 23px;
+    /* font-family: 'Arial Narrow', sans-serif; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 1px;
+
+}
+
+.h11 p a {
+    text-decoration: none;
+    color: #FFFFFFB3;
+}
+
+.h11 p a:hover {
+    text-decoration: underline;
+    color: #ffff;
+}
+
+.footer-icons {
+    filter: brightness(0) invert(1);
+    height: 15%;
+    padding-top: 30px;
+}
+
+.ul-1 {
+    list-style-type: none;
+}
+
+.li-1 {
+    display: inline;
+    padding: 15px;
+    font-size: 25px;
+
+}
+
+.copyright-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 27px;
+}
+
+.copyright-textbox {
+    font-size: 13px;
+    color: #FFFFFFB3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 20px;
+    font-weight: lighter;
+    padding-left: 20px;
+    padding-top: 0%;
+    filter: brightness(0) invert(0.5);
+}
+
+.payment-logo {
+    padding: 25px 10px 10px 10px;
+    margin-right: 10px;
+}
+
+.Mastercard {
+    width: 35px;
+    height: 22.5px;
+    padding-left: 7px;
+    border-radius: 2px;
+}
+
+.visa-card {
+    width: 35px;
+    height: 22.5px;
+    border-radius: 2px;
+}
+
+.fa-brands {
+    padding: 6px;
+}
+
+.chatbox {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 90%;
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 1000;
+}
+
+.chat i {
+    margin-right: 6px;
+}
+
+
+.chat {
+    background-color: #d6d2d2;
+    color: rgb(61, 58, 58);
+    padding: 9px 15px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ribbon {
+    background-color: #222323;
+    width: 100%;
+    list-style-type: disc;
+    padding: 10px;
+    margin: 0;
+
+}
+
+.ribbon-items {
+    font-size: 11px;
+    color: white;
+    position: relative;
+
+}
+
+.ribbon-items ul {
+    margin: 0;
+    padding: 0;
+}
+
+.ribbon-items li {
+    padding-left: 25%;
+}
+
+.animation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#r-item1,
+#r-item2 {
+    width: 50%;
+}
