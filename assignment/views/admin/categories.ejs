@@ -1,95 +1,122 @@
 <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 30px;
+    }
+    h1 {
+        margin-bottom: 30px;
+        border-bottom: 2px solid #b5b9bd;
+        padding-bottom: 10px;
+    }
     .btn {
-    padding: 5px 10px;
-    font-size: 14px;  
-  }
-  
-  .table td {
-    vertical-align: middle;
-  }
-  .btn {
-    max-width: 106px; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-  }
+        padding: 5px 10px;
+        font-size: 14px;
+        max-width: 106px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .table {
+        background-color: #ffffff;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+    .modal-content {
+        border-radius: 8px;
+    }
+    .modal-header {
+        background-color: #f1f3f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
 </style>
 
-<h1 class="mb-4">Categories</h1>
+<h1 class="text-center">Categories</h1>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">Add Category</button>
+            <span class="text-muted">Total Categories: <%= categories.length %></span>
+        </div>
 
-<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createCategoryModal">Add Category</button>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% categories.forEach(category => { %>
+                        <tr>
+                            <td><%= category.name %></td>
+                            <td><%= category.description %></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editCategoryModal<%= category._id %>">Edit</button>
+                                <a href="/admin/categories/delete/<%= category._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+        <!-- Create Category Modal -->
+        <div class="modal fade" id="createCategoryModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/admin/categories/create" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Category Modals -->
         <% categories.forEach(category => { %>
-            <tr>
-                <td><%= category.name %></td>
-                <td><%= category.description %></td>
-                <td>
-                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editCategoryModal<%= category._id %>">Edit</button>
-                    <a href="/admin/categories/delete/<%= category._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
-                </td>
-            </tr>
+            <div class="modal fade" id="editCategoryModal<%= category._id %>" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Category</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/categories/edit/<%= category._id %>" method="POST">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<%= category.name %>" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"><%= category.description %></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Category</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <% }) %>
-    </tbody>
-</table>
-
-<!-- Create Category Modal -->
-<div class="modal fade" id="createCategoryModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Create New Category</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/categories/create" method="POST">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Category</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Category Modals -->
-<% categories.forEach(category => { %>
-    <div class="modal fade" id="editCategoryModal<%= category._id %>" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/admin/categories/edit/<%= category._id %>" method="POST">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<%= category.name %>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"><%= category.description %></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Category</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-<% }) %>
 
