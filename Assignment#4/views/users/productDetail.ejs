@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/productDetails.css">
+
+<div class="product-detail">
+    <img class="product-image" src="<%= product.image %>" alt="<%= product.name %>">
+    
+    <div class="product-info">
+        <h2 class="product-name"><%= product.name %></h2>
+        <p class="product-price">RS.<%= product.price %></p>
+        <p class="product-description"><%= product.description %></p>
+        
+        <div class="product-features">
+            <p class="free-shipping">Free Shipping</p>
+            <p class="estimated-delivery">Estimated Delivery: 5-7 Days</p>
+        </div>
+
+        <form action="/add-to-cart/<%= product._id %>" method="POST">
+            <div class="quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+            </div>
+            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+        </form>
+    </div>
+</div>

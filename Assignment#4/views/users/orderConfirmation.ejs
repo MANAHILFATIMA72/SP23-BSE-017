@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/orderConfirmation.css">
+
+<h1>Order Confirmation</h1>
+
+<p>Thank you for your order, <%= order.user.name %>!</p>
+<p>Your order has been successfully placed. Below are the details:</p>
+
+<h3>Order Details</h3>
+<ul>
+  <% order.items.forEach(item => { %>
+    <li><%= item.product.name %> - Quantity: <%= item.quantity %> - Price: RS.<%= item.product.price * item.quantity %></li>
+  <% }) %>
+</ul>
+
+<p><strong>Total Price: RS.<%= order.totalPrice %></strong></p>
+
+<p>Your order will be shipped to: <%= order.user.address %></p>
+<p>We will contact you at: <%= order.user.phone %></p>
+
+<a href="/">Go to Home</a>

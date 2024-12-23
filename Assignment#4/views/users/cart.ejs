@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/cart.css">
+
+<h1>Your Cart</h1>
+
+<% if (cart && cart.length > 0) { %>
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cart.forEach(item => { %>
+        <tr>
+          <td>
+            <img src="<%= item.product.image %>" alt="<%= item.product.name %>" class="cart-product-image">
+            <span><%= item.product.name %></span>
+          </td>
+          <td>RS.<%= item.product.price %></td>
+          <td><%= item.quantity %></td>
+          <td>RS.<%= item.product.price * item.quantity %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="cart-summary">
+    <p><strong>Total Price: RS.<%= totalPrice %></strong></p>
+    <a href="/checkout" class="checkout-btn">Proceed to Checkout</a>
+  </div>
+<% } else { %>
+  <p>Your cart is empty.</p>
+<% } %>
