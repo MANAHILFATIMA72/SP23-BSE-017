@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const flash = require('connect-flash');
 const adminRoutes = require('./routes/admin');
 const expressLayouts = require('express-ejs-layouts');
 require('dotenv').config();
@@ -20,6 +21,7 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(flash());
 app.use('/uploads', express.static('public/uploads'));
 app.use(cookieParser());
 app.use(
@@ -55,27 +57,31 @@ app.get('/', optionalAuthenticateJWT, (req, res) => {
       return res.redirect('/admin/dashboard');
     }
   }
-  res.render('users/index', { layout: 'layouts/homeLayout', title: "Charcoal Clothing | Best Men's Formal &amp; Casual Wear Brand" });
+  res.render('users/index', { 
+    layout: 'layouts/homeLayout',
+    title: "Charcoal Clothing | Best Men's Formal &amp; Casual Wear Brand",
+    messages: req.flash() 
+  });
 });
 
 app.get('/login', (req, res) => {
-  res.render('users/login', { layout: 'layouts/main', title: "Login" });
+  res.render('users/login', { layout: 'layouts/main', title: "Login", messages: req.flash() });
 });
 
 app.get('/signUp', (req, res) => {
-  res.render('users/sign-up', { layout: 'layouts/main', title: "Sign-up" });
+  res.render('users/sign-up', { layout: 'layouts/main', title: "Sign-up", messages: req.flash() });
 });
 
 app.get('/search', (req, res) => {
-  res.render('users/search', { layout: 'layouts/main', title: "Search" });
+  res.render('users/search', { layout: 'layouts/main', title: "Search", messages: req.flash() });
 });
 
 app.get('/about', (req, res) => {
-  res.render('users/about-us', { layout: 'layouts/main', title: "About-us" });
+  res.render('users/about-us', { layout: 'layouts/main', title: "About-us", messages: req.flash() });
 });
 
 app.get('/contact', (req, res) => {
-  res.render('users/contact', { layout: 'layouts/main', title: "Location" });
+  res.render('users/contact', { layout: 'layouts/main', title: "Location", messages: req.flash() });
 });
 
 // Start the server

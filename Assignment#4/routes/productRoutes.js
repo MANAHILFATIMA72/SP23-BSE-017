@@ -10,6 +10,7 @@ router.get('/category/:categoryName', async (req, res) => {
     const category = await Category.findOne({ name: categoryName });
 
     if (!category) {
+      req.flash('error', 'Category not found');
       return res.status(404).render('users/index', { title: 'Home', message: 'Category not found' });
     }
 
@@ -22,6 +23,7 @@ router.get('/category/:categoryName', async (req, res) => {
       categoryName,
     });
   } catch (error) {
+    req.flash('error', 'Error fetching products');
     console.error('Error fetching products:', error);
     res.status(500).render('users/index', { title: 'Home', message: 'Error fetching products' });
   }

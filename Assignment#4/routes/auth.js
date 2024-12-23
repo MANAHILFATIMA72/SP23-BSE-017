@@ -46,8 +46,15 @@ router.post('/login', async (req, res) => {
 
     try {
         const user = await User.findOne({ email });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(400).send('Invalid email or password');
+        if (!user) {
+            req.flash('error', 'Invalid email or password');
+            return res.redirect('/login');
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            req.flash('error', 'Invalid email or password');
+            return res.redirect('/login');
         }
 
         const token = jwt.sign(
@@ -57,6 +64,7 @@ router.post('/login', async (req, res) => {
         );
 
         res.cookie('token', token, { httpOnly: true });
+        req.flash('success', 'Login successful');
 
         // Redirect based on role
         if (user.role === 'admin') {
@@ -66,6 +74,7 @@ router.post('/login', async (req, res) => {
         }
     } catch (err) {
         console.error('Error logging in:', err);
+        req.flash('error', 'Error logging in');
         res.status(500).send('Error logging in');
     }
 });

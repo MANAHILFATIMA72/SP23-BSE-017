@@ -27,7 +27,8 @@ router.get('/dashboard', authenticateToken, authorizeRole('admin'), async (req, 
     res.render('admin/dashboard', {
         layout: "layouts/adminLayout",
         title: "Admin Dashboard",
-        user: req.user, // Pass user details to the template
+        user: req.user, 
+        messages: req.flash()
     });
 });
 
@@ -69,6 +70,7 @@ router.get('/products', authenticateToken, authorizeRole('admin'), async (req, r
             order,
             currentPage: page,
             totalPages,
+            messages: req.flash(),
         });
     } catch (err) {
         console.error('Error fetching products:', err);
@@ -84,14 +86,17 @@ router.post('/products/create', authenticateToken, authorizeRole('admin'), uploa
 
         const categoryDoc = await Category.findById(category);
         if (!categoryDoc) {
+            req.flash('error', 'Invalid Category');
             return res.status(400).send('Invalid Category');
         }
 
         const product = new Product({ name, price, description, category, image });
         await product.save();
+        req.flash('success', 'Product created successfully');
         res.redirect('/admin/products');
     } catch (err) {
         console.error('Error saving product:', err);
+        req.flash('error', 'Error saving product');
         res.status(500).send('Error saving product');
     }
 });
@@ -126,9 +131,11 @@ router.get('/products/delete/:id', authenticateToken, authorizeRole('admin'), as
     try {
         const { id } = req.params;
         await Product.findByIdAndDelete(id);
+        req.flash('success', 'Product deleted successfully');
         res.redirect('/admin/products');
     } catch (err) {
         console.error('Error deleting product:', err);
+        req.flash('error', 'Error deleting product');
         res.status(500).send('Error deleting product');
     }
 });
