@@ -77,3 +77,16 @@ h2 {
 .login a:hover {
     text-decoration: none;
 }
+
+.input-group select {
+    width: 450px;
+    padding: 1.5rem;
+    border: 1px solid #a5a3a3;
+    background-color: transparent;
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+.input-group select:focus {
+    outline: none;
+}
