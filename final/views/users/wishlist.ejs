@@ -2,27 +2,31 @@
 
 <h1 class="category-title">Your Wishlist</h1>
 
-    <div class="products">
-        <% if (wishlist && wishlist.length > 0) { %>
-            <ul class="product-list">
-                <% wishlist.forEach(product => { %>
-                    <li class="product-item">
-                        <a href="/product/<%= product._id %>">
-                            <% if (product.image) { %>
-                                <img class="product-image" src="<%= product.image %>" alt="<%= product.name %>">
-                            <% } else { %>
-                                <div class="product-image-placeholder"></div>
-                            <% } %>
-                            <h2 class="product-name"><%= product.name %></h2>
-                            <p class="product-price">RS.<%= product.price %></p>
-                        </a>
-                        <button class="remove-from-wishlist" data-product-id="<%= product._id %>">Remove from Wishlist</button>
-                    </li>
-                <% }) %>
-            </ul>
-        <% } else { %>
-            <p class="no-products-message">Your wishlist is empty.</p>
-        <% } %>
-    </div>
+<div class="products">
+    <% if (wishlist && wishlist.length > 0) { %>
+        <ul class="product-list">
+            <% wishlist.forEach(product => { %>
+                <li class="product-item">
+                    <a href="/product/<%= product._id %>">
+                        <% if (product.image) { %>
+                            <img class="product-image" src="<%= product.image %>" alt="<%= product.name %>">
+                        <% } else { %>
+                            <div class="product-image-placeholder"></div>
+                        <% } %>
+                        <h2 class="product-name"><%= product.name %></h2>
+                        <p class="product-price">RS.<%= product.price %></p>
+                    </a>
 
-    <a href="/" class="back-to-home">Back to Home</a>
+                    <!-- Remove from Wishlist Form -->
+                    <form action="/wishlist/remove/<%= product._id %>" method="POST">
+                        <button type="submit" class="remove-from-wishlist">Remove from Wishlist</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p class="no-products-message">Your wishlist is empty.</p>
+    <% } %>
+</div>
+
+<a href="/" class="back-to-home">Back to Home</a>

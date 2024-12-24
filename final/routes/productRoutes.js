@@ -69,6 +69,42 @@ router.get('/wishlist', authenticateToken, async (req, res) => {
     }
 });
 
+// Route to remove a product from the wishlist
+router.post('/wishlist/remove/:productId', authenticateToken, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      const productId = req.params.productId;
+
+      // Find the user
+      const user = await User.findById(userId);
+
+      if (!user) {
+          req.flash('error', 'User not found.');
+          return res.redirect('/wishlist');
+      }
+
+      // Check if the product is in the wishlist
+      const productIndex = user.wishlist.indexOf(productId);
+
+      if (productIndex === -1) {
+          req.flash('error', 'Product not found in wishlist.');
+          return res.redirect('/wishlist');
+      }
+
+      // Remove the product from the wishlist
+      user.wishlist.splice(productIndex, 1);
+      await user.save();
+
+      req.flash('success', 'Product removed from wishlist.');
+      res.redirect('/wishlist');
+  } catch (error) {
+      console.error(error);
+      req.flash('error', 'Error removing product from wishlist.');
+      res.redirect('/wishlist');
+  }
+});
+
+
 // Route to display products by category
 router.get('/category/:categoryName', async (req, res) => {
     try {
