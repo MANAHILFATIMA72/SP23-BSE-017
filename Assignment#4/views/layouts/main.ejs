@@ -15,7 +15,36 @@
 </head>
 <body>
     <%- include('../partials/header') %>
-    
+    <% if (messages.success) { %>
+        <div class="alert alert-success">
+          <i class="fas fa-check-circle"></i> <!-- Success Icon -->
+          <span><%= messages.success %></span>
+          <a href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+        </div>
+      <% } %>
+      <% if (messages.error) { %>
+        <div class="alert alert-danger">
+          <i class="fas fa-times-circle"></i> <!-- Error Icon -->
+          <span><%= messages.error %></span>
+          <a href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+        </div>
+      <% } %>
+      <% if (messages.info) { %>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i> <!-- Info Icon -->
+          <span><%= messages.info %></span>
+          <a href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+        </div>
+      <% } %>
+      <% if (messages.warning) { %>
+        <div class="alert alert-warning">
+          <i class="fas fa-exclamation-circle"></i> <!-- Warning Icon -->
+          <span><%= messages.warning %></span>
+          <a href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+        </div>
+      <% } %>
+      
+      
     <%- body %>
 
     <%- include('../partials/footer') %>

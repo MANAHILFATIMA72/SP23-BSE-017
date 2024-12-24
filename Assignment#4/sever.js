@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const flash = require('connect-flash');
-const adminRoutes = require('./routes/admin');
 const expressLayouts = require('express-ejs-layouts');
 require('dotenv').config();
 
@@ -21,8 +20,6 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(flash());
-app.use('/uploads', express.static('public/uploads'));
 app.use(cookieParser());
 app.use(
   session({
@@ -31,6 +28,15 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(flash()); // Place flash AFTER session
+
+// Custom middleware to make flash messages available in all views
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
+
+app.use('/uploads', express.static('public/uploads'));
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -41,6 +47,7 @@ app.set('layout', '/layouts/main');
 // Import routes
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 
 // Use routes
 app.use('/', productRoutes);
@@ -60,32 +67,31 @@ app.get('/', optionalAuthenticateJWT, (req, res) => {
   res.render('users/index', { 
     layout: 'layouts/homeLayout',
     title: "Charcoal Clothing | Best Men's Formal &amp; Casual Wear Brand",
-    messages: req.flash() 
   });
 });
 
 app.get('/login', (req, res) => {
-  res.render('users/login', { layout: 'layouts/main', title: "Login", messages: req.flash() });
+  res.render('users/login', { layout: 'layouts/main', title: "Login" });
 });
 
 app.get('/signUp', (req, res) => {
-  res.render('users/sign-up', { layout: 'layouts/main', title: "Sign-up", messages: req.flash() });
+  res.render('users/sign-up', { layout: 'layouts/main', title: "Sign-up" });
 });
 
 app.get('/search', (req, res) => {
-  res.render('users/search', { layout: 'layouts/main', title: "Search", messages: req.flash() });
+  res.render('users/search', { layout: 'layouts/main', title: "Search" });
 });
 
 app.get('/about', (req, res) => {
-  res.render('users/about-us', { layout: 'layouts/main', title: "About-us", messages: req.flash() });
+  res.render('users/about-us', { layout: 'layouts/main', title: "About-us" });
 });
 
 app.get('/contact', (req, res) => {
-  res.render('users/contact', { layout: 'layouts/main', title: "Location", messages: req.flash() });
+  res.render('users/contact', { layout: 'layouts/main', title: "Location" });
 });
 
 app.get('/orderConfirmation', (req, res) => {
-  res.render('users/orderConfirmation', { layout: 'layouts/main', title: "Location", messages: req.flash() });
+  res.render('users/orderConfirmation', { layout: 'layouts/main', title: "Location" });
 });
 
 // Start the server

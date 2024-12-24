@@ -1,8 +1,8 @@
 const express = require('express');
-const Product = require('../models/products');
-const Category = require('../models/category');
+const Product = require('../models/Products');
+const Category = require('../models/Category');
 const upload = require('../middleware/multer');
-const jwt = require('jsonwebtoken'); // Import jwt here
+const jwt = require('jsonwebtoken');
 const { optionalAuthenticateJWT, authorizeRole } = require('../middleware/auth');
 const router = express.Router();
 
@@ -10,12 +10,14 @@ const router = express.Router();
 function authenticateToken(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
-        return res.redirect('/login'); // Redirect to login if no token
+        req.flash('error', 'Please log in to access this page.');
+        return res.redirect('/login');
     }
 
     jwt.verify(token, process.env.JWT_SECRET || 'you_are_strong_enough', (err, user) => {
         if (err) {
-            return res.redirect('/login'); // Redirect to login if token is invalid
+            req.flash('error', 'Invalid or expired session. Please log in again.');
+            return res.redirect('/login');
         }
         req.user = user;
         next();
@@ -27,8 +29,8 @@ router.get('/dashboard', authenticateToken, authorizeRole('admin'), async (req, 
     res.render('admin/dashboard', {
         layout: "layouts/adminLayout",
         title: "Admin Dashboard",
-        user: req.user, 
-        messages: req.flash()
+        user: req.user,
+        messages: req.flash(),
     });
 });
 
@@ -43,12 +45,8 @@ router.get('/products', authenticateToken, authorizeRole('admin'), async (req, r
         const limit = parseInt(req.query.limit) || 10;
 
         const query = {};
-        if (search) {
-            query.name = { $regex: search, $options: 'i' };
-        }
-        if (categoryFilter) {
-            query.category = categoryFilter;
-        }
+        if (search) query.name = { $regex: search, $options: 'i' };
+        if (categoryFilter) query.category = categoryFilter;
 
         const totalProducts = await Product.countDocuments(query);
         const products = await Product.find(query)
@@ -74,7 +72,8 @@ router.get('/products', authenticateToken, authorizeRole('admin'), async (req, r
         });
     } catch (err) {
         console.error('Error fetching products:', err);
-        res.status(500).send('Internal Server Error');
+        req.flash('error', 'Failed to fetch products.');
+        res.redirect('/admin/dashboard');
     }
 });
 
@@ -86,18 +85,18 @@ router.post('/products/create', authenticateToken, authorizeRole('admin'), uploa
 
         const categoryDoc = await Category.findById(category);
         if (!categoryDoc) {
-            req.flash('error', 'Invalid Category');
-            return res.status(400).send('Invalid Category');
+            req.flash('error', 'Invalid category selected.');
+            return res.redirect('/admin/products');
         }
 
         const product = new Product({ name, price, description, category, image });
         await product.save();
-        req.flash('success', 'Product created successfully');
+        req.flash('success', 'Product created successfully.');
         res.redirect('/admin/products');
     } catch (err) {
         console.error('Error saving product:', err);
-        req.flash('error', 'Error saving product');
-        res.status(500).send('Error saving product');
+        req.flash('error', 'Failed to create product.');
+        res.redirect('/admin/products');
     }
 });
 
@@ -109,20 +108,17 @@ router.post('/products/edit/:id', authenticateToken, authorizeRole('admin'), upl
 
         const categoryDoc = await Category.findById(category);
         if (!categoryDoc) {
-            return res.status(400).send('Invalid Category');
+            req.flash('error', 'Invalid category selected.');
+            return res.redirect('/admin/products');
         }
 
-        await Product.findByIdAndUpdate(id, {
-            name,
-            price,
-            description,
-            category,
-        });
-
+        await Product.findByIdAndUpdate(id, { name, price, description, category });
+        req.flash('success', 'Product updated successfully.');
         res.redirect('/admin/products');
     } catch (err) {
         console.error('Error editing product:', err);
-        res.status(500).send('Error editing product');
+        req.flash('error', 'Failed to update product.');
+        res.redirect('/admin/products');
     }
 });
 
@@ -131,12 +127,12 @@ router.get('/products/delete/:id', authenticateToken, authorizeRole('admin'), as
     try {
         const { id } = req.params;
         await Product.findByIdAndDelete(id);
-        req.flash('success', 'Product deleted successfully');
+        req.flash('success', 'Product deleted successfully.');
         res.redirect('/admin/products');
     } catch (err) {
         console.error('Error deleting product:', err);
-        req.flash('error', 'Error deleting product');
-        res.status(500).send('Error deleting product');
+        req.flash('error', 'Failed to delete product.');
+        res.redirect('/admin/products');
     }
 });
 
@@ -144,10 +140,15 @@ router.get('/products/delete/:id', authenticateToken, authorizeRole('admin'), as
 router.get('/categories', authenticateToken, authorizeRole('admin'), async (req, res) => {
     try {
         const categories = await Category.find();
-        res.render('admin/categories', { layout: "layouts/adminLayout", categories });
+        res.render('admin/categories', {
+            layout: "layouts/adminLayout",
+            categories,
+            messages: req.flash(),
+        });
     } catch (err) {
         console.error('Error fetching categories:', err);
-        res.status(500).send('Error fetching categories');
+        req.flash('error', 'Failed to fetch categories.');
+        res.redirect('/admin/dashboard');
     }
 });
 
@@ -157,15 +158,18 @@ router.post('/categories/create', authenticateToken, authorizeRole('admin'), asy
         const { name, description } = req.body;
 
         if (!name) {
-            return res.status(400).send('Category name is required');
+            req.flash('error', 'Category name is required.');
+            return res.redirect('/admin/categories');
         }
 
         const category = new Category({ name, description });
         await category.save();
+        req.flash('success', 'Category created successfully.');
         res.redirect('/admin/categories');
     } catch (err) {
         console.error('Error creating category:', err);
-        res.status(500).send('Error creating category');
+        req.flash('error', 'Failed to create category.');
+        res.redirect('/admin/categories');
     }
 });
 
@@ -176,14 +180,17 @@ router.post('/categories/edit/:id', authenticateToken, authorizeRole('admin'), a
         const { name, description } = req.body;
 
         if (!name) {
-            return res.status(400).send('Category name is required');
+            req.flash('error', 'Category name is required.');
+            return res.redirect('/admin/categories');
         }
 
         await Category.findByIdAndUpdate(id, { name, description });
+        req.flash('success', 'Category updated successfully.');
         res.redirect('/admin/categories');
     } catch (err) {
         console.error('Error editing category:', err);
-        res.status(500).send('Error editing category');
+        req.flash('error', 'Failed to update category.');
+        res.redirect('/admin/categories');
     }
 });
 
@@ -192,18 +199,18 @@ router.get('/categories/delete/:id', authenticateToken, authorizeRole('admin'), 
     try {
         const { id } = req.params;
         await Category.findByIdAndDelete(id);
+        req.flash('success', 'Category deleted successfully.');
         res.redirect('/admin/categories');
     } catch (err) {
         console.error('Error deleting category:', err);
-        res.status(500).send('Error deleting category');
+        req.flash('error', 'Failed to delete category.');
+        res.redirect('/admin/categories');
     }
 });
 
 // Logout Route (Protected)
 router.post('/logout', authenticateToken, (req, res) => {
-  // Clear the token from cookies
-  res.clearCookie('token').redirect('/'); // Redirect to homepage or login page
+    res.clearCookie('token').redirect('/');
 });
-
 
 module.exports = router;
