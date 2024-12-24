@@ -1,0 +1,91 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.confirmation-container {
+    margin: 5% auto;
+    background-color: #f7f4f4;
+    padding: 2rem;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    color: #222323;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+h1 i {
+    color: #ea4c40;
+    margin-right: 10px;
+}
+
+.confirmation-details {
+    width: 100%;
+    /* text-align: left; */
+}
+
+p {
+    color: #222323;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.total-price {
+    font-size: 20px;
+    color: #ea4c40;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.shipping-info {
+    background-color: #f7f4f4;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.shipping-info p {
+    margin-bottom: 0.5rem;
+}
+
+.shipping-info i {
+    color: #ea4c40;
+    margin-right: 10px;
+}
+
+.home-btn-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #ea4c40;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.home-btn:hover {
+    background-color: #ef6d6d;
+}
+
+.home-btn i {
+    margin-right: 10px;
+}

@@ -1,20 +1,22 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="/css/orderConfirmation.css">
 
-<h1>Order Confirmation</h1>
+<div class="confirmation-container">
+  <h1><i class="fas fa-check-circle"></i> Order Confirmation</h1>
 
-<p>Thank you for your order, <%= order.user.name %>!</p>
-<p>Your order has been successfully placed. Below are the details:</p>
+  <div class="confirmation-details">
+    <p>Thank you for your order, <%= order.user.name %>!</p>
+    <p>Your order has been successfully placed. Below are the details:</p>
 
-<h3>Order Details</h3>
-<ul>
-  <% order.items.forEach(item => { %>
-    <li><%= item.product.name %> - Quantity: <%= item.quantity %> - Price: RS.<%= item.product.price * item.quantity %></li>
-  <% }) %>
-</ul>
+    <p class="total-price"><strong>Total Price: RS.<%= order.totalPrice %></strong></p>
 
-<p><strong>Total Price: RS.<%= order.totalPrice %></strong></p>
+    <div class="shipping-info">
+      <p><i class="fas fa-shipping-fast"></i> Your order will be shipped to: <%= order.user.address %></p>
+      <p><i class="fas fa-phone"></i> We will contact you at: <%= order.user.phone %></p>
+    </div>
 
-<p>Your order will be shipped to: <%= order.user.address %></p>
-<p>We will contact you at: <%= order.user.phone %></p>
-
-<a href="/">Go to Home</a>
+    <div class="home-btn-container">
+      <a href="/" class="home-btn"><i class="fas fa-home"></i> Go to Home</a>
+  </div>
+  </div>
+</div>

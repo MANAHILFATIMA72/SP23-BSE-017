@@ -7,15 +7,26 @@ const orderSchema = new mongoose.Schema({
     phone: String,
     email: String,
   },
-  items: [{
-    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    quantity: Number,
-  }],
+  shippingMethod: String,
+  paymentMethod: String,
+  items: [
+    {
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+      quantity: Number,
+    },
+  ],
   totalPrice: Number,
-  status: String,  // You can update the status later (e.g., "Pending", "Shipped")
-  date: { type: Date, default: Date.now },
+  status: {
+    type: String,
+    default: 'Pending',
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const Order = mongoose.model('Order', orderSchema);
-
-module.exports = Order;
+module.exports = mongoose.model('Order', orderSchema);

@@ -84,6 +84,10 @@ app.get('/contact', (req, res) => {
   res.render('users/contact', { layout: 'layouts/main', title: "Location", messages: req.flash() });
 });
 
+app.get('/orderConfirmation', (req, res) => {
+  res.render('users/orderConfirmation', { layout: 'layouts/main', title: "Location", messages: req.flash() });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Products');
+const Order = require('../models/Order');
 const Category = require('../models/Category');
 
 // Route to display products by category
@@ -53,15 +54,17 @@ router.get('/product/:productId', async (req, res) => {
 });
 
 // Route for adding product to the cart
+// Route to add a product to the cart
 router.post('/add-to-cart/:productId', async (req, res) => {
   try {
     const productId = req.params.productId;
-    const quantity = req.body.quantity || 1;
+    const quantity = parseInt(req.body.quantity, 10) || 1;
 
+    // Fetch product details from the database
     const product = await Product.findById(productId);
 
     if (!product) {
-      req.flash('error', 'Product not found');
+      req.flash('error', 'Product not found.');
       return res.redirect('/');
     }
 
@@ -71,25 +74,33 @@ router.post('/add-to-cart/:productId', async (req, res) => {
     }
 
     // Check if the product is already in the cart
-    const existingItem = req.session.cart.find(item => item.product._id.toString() === productId);
+    const existingProductIndex = req.session.cart.findIndex(
+      (item) => item.product._id.toString() === productId
+    );
 
-    if (existingItem) {
-      // If product exists, update quantity
-      existingItem.quantity += quantity;
+    if (existingProductIndex > -1) {
+      // Update quantity if product exists
+      req.session.cart[existingProductIndex].quantity += quantity;
     } else {
-      // If product doesn't exist, add it to the cart
-      req.session.cart.push({ product, quantity });
+      // Add new product to the cart
+      req.session.cart.push({
+        product: {
+          _id: product._id,
+          name: product.name,
+          price: product.price,
+        },
+        quantity,
+      });
     }
 
-    res.redirect('/cart');
+    req.flash('success', 'Product added to cart.');
+    res.redirect('/cart'); // Redirect to cart page
   } catch (error) {
     console.error('Error adding product to cart:', error);
-    req.flash('error', 'Error adding product to cart');
+    req.flash('error', 'Something went wrong.');
     res.redirect('/');
   }
 });
-
-
 
 // Route to display cart page
 router.get('/cart', (req, res) => {
@@ -134,38 +145,50 @@ router.get('/checkout', (req, res) => {
   });
 });
 
-// Route to handle order submission
 router.post('/submit-order', async (req, res) => {
   try {
-    const { name, address, phone, email } = req.body;
+    const { name, address, phone, email, shippingMethod, paymentMethod } = req.body;
 
-    if (!name || !address || !phone || !email) {
+    // Validate required fields
+    if (!name || !address || !phone || !email || !shippingMethod || !paymentMethod) {
       req.flash('error', 'All fields are required.');
       return res.redirect('/checkout');
     }
 
-    // Create an order object
+    // Calculate total price with shipping
+    const shippingCost = shippingMethod === 'Express Shipping' ? 200 : 0;
+    const totalPrice = req.session.cart.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    ) + shippingCost;
+
+    // Create a new order object
     const order = {
       user: {
         name,
         address,
         phone,
-        email
+        email,
       },
+      shippingMethod,
+      paymentMethod,
       items: req.session.cart,
-      totalPrice: req.session.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0),
-      status: 'Pending',  // Order status (you can update this later)
+      totalPrice,
+      status: 'Pending', // Default order status
       date: new Date(),
     };
 
-    // Save the order (assuming you have an Order model)
+    // Save the order to the database
     const newOrder = await Order.create(order);
 
     // Clear the cart after order is placed
     req.session.cart = [];
 
-    // Redirect to a confirmation page (or order details page)
-    res.redirect(`/order-confirmation/${newOrder._id}`);
+    // Store the new order in the session for confirmation
+    req.session.order = newOrder;
+
+    // Redirect to the confirmation page
+    res.redirect('/order-confirmation');
   } catch (error) {
     console.error('Error submitting order:', error);
     req.flash('error', 'There was an issue with your order.');
@@ -174,7 +197,31 @@ router.post('/submit-order', async (req, res) => {
 });
 
 
+router.get('/order-confirmation', (req, res) => {
+  const order = req.session.order;
+
+  if (!order) {
+    req.flash('error', 'No order found.');
+    return res.redirect('/');
+  }
+
+  res.render('users/orderConfirmation', {
+    layout: './layouts/main',
+    title: 'Order Confirmation',
+    order,
+  });
+});
 
 
+// Route to remove a product from the cart
+router.post('/cart/remove/:index', (req, res) => {
+  const index = parseInt(req.params.index);
+
+  if (req.session.cart && req.session.cart[index]) {
+    req.session.cart.splice(index, 1); // Remove the product from the cart
+  }
+
+  res.redirect('/cart'); // Redirect back to the cart page
+});
 
 module.exports = router;
