@@ -1,22 +1,28 @@
-<h1>Your Wishlist</h1>
+<link rel="stylesheet" href="/css/wishlist.css">
 
-<% if (wishlist.length> 0) { %>
-    <ul>
-        <% wishlist.forEach(product=> { %>
-            <li>
-                <h2>
-                    <%= product.name %>
-                </h2>
-                <p>
-                    <%= product.description %>
-                </p>
-                <p>Price: $<%= product.price %>
-                </p>
-            </li>
-            <% }) %>
-    </ul>
-    <% } else { %>
-        <p>Your wishlist is empty.</p>
+<h1 class="category-title">Your Wishlist</h1>
+
+    <div class="products">
+        <% if (wishlist && wishlist.length > 0) { %>
+            <ul class="product-list">
+                <% wishlist.forEach(product => { %>
+                    <li class="product-item">
+                        <a href="/product/<%= product._id %>">
+                            <% if (product.image) { %>
+                                <img class="product-image" src="<%= product.image %>" alt="<%= product.name %>">
+                            <% } else { %>
+                                <div class="product-image-placeholder"></div>
+                            <% } %>
+                            <h2 class="product-name"><%= product.name %></h2>
+                            <p class="product-price">RS.<%= product.price %></p>
+                        </a>
+                        <button class="remove-from-wishlist" data-product-id="<%= product._id %>">Remove from Wishlist</button>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p class="no-products-message">Your wishlist is empty.</p>
         <% } %>
+    </div>
 
-            <a href="/">Back to Home</a>
+    <a href="/" class="back-to-home">Back to Home</a>

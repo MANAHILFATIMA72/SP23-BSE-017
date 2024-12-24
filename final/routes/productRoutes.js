@@ -315,4 +315,9 @@ router.post('/cart/remove/:index', (req, res) => {
   res.redirect('/cart'); // Redirect back to the cart page
 });
 
+// Logout Route (Protected)
+router.post('/logout', authenticateToken, (req, res) => {
+  res.clearCookie('token').redirect('/');
+});
+
 module.exports = router;

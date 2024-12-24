@@ -68,13 +68,19 @@ body {
     margin: 0;
 }
 
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .quantity {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .quantity label {
-    display: block;
-    margin-bottom: 8px;
     font-weight: 600;
     color: #2d3436;
 }
@@ -93,20 +99,37 @@ body {
     border-color: #74b9ff;
 }
 
-.add-to-cart-btn {
-    width: 100%;
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-to-cart-btn, .add-to-wishlist-btn {
     padding: 15px 30px;
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
-    background-color: #e74c3c;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.add-to-cart-btn {
+    background-color: #e74c3c;
 }
 
 .add-to-cart-btn:hover {
+    background-color: #c0392b;
+}
+
+.add-to-wishlist-btn {
+    background-color: #e74c3c;
+}
+
+.add-to-wishlist-btn:hover {
     background-color: #c0392b;
 }
 
@@ -121,7 +144,8 @@ body {
         max-width: 50%;
     }
 
-    .add-to-cart-btn {
-        width: auto;
+    .button-group {
+        flex-direction: row;
     }
 }
+

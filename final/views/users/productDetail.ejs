@@ -14,18 +14,18 @@
         </div>
 
         <!-- Add to Cart Form -->
-        <form action="/add-to-cart/<%= product._id %>" method="POST">
+        <form action="/add-to-cart/<%= product._id %>" method="POST" class="product-actions">
             <div class="quantity">
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" min="1" value="1" required>
             </div>
-            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            <div class="button-group">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                <button type="button" id="add-to-wishlist-btn" class="add-to-wishlist-btn" onclick="addToWishlist('<%= product._id %>')">
+                    Add to Wishlist
+                </button>
+            </div>
         </form>
-
-        <!-- Add to Wishlist Button -->
-        <button id="add-to-wishlist-btn" class="add-to-wishlist-btn" onclick="addToWishlist('<%= product._id %>')">
-            Add to Wishlist
-        </button>
     </div>
 </div>
 
