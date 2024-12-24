@@ -141,11 +141,12 @@ dropdown li:hover>.dropdown {
 
 .fa-search,
 .fa-user,
-.fa-cart-shopping {
+.fa-cart-shopping,
+.fa-arrow-right-from-bracket {
     filter: brightness(0);
     font-size: 15px;
 }
 
-.fa-cart-shopping {
-    margin-right: 20px;
+.fa-arrow-right-from-bracket {
+    /* margin-right: 20px; */
 }
