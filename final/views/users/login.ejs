@@ -1,0 +1,20 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" action="/auth/login" method="POST">
+        <div class="input-group">
+            <input type="email" name="email" id="email" placeholder="E-mail" required>
+            <div id="emailError" class="error"></div>
+        </div>
+        <div class="input-group">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <div id="passwordError" class="error"></div>
+        </div>
+        <div class="forgot-password">
+            <a href="#">Forgot your password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+    </form>
+    <div class="sign-up">
+        <a href="/signUp">Sign up</a>
+    </div>
+</div>

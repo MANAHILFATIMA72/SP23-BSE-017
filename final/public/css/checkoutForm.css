@@ -1,0 +1,103 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout-container {
+    margin: 5% auto;
+    background-color: #f7f4f4;
+    padding: 2rem;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 28px;
+    color: #222323;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+form {
+    width: 100%;
+}
+
+.checkout-details {
+    width: 100%;
+}
+
+h3 {
+    font-size: 20px;
+    color: #222323;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: #222323;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 1.5rem;
+    border: 1px solid #a5a3a3;
+    background-color: transparent;
+    font-size: 1rem;
+    opacity: 0.5;
+    box-sizing: border-box;
+}
+
+.input-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    outline: none;
+    opacity: 1;
+}
+
+.cart-summary {
+    margin-top: 1.5rem;
+    text-align: right;
+    font-size: 18px;
+    color: #222323;
+}
+
+.submit-order-btn {
+    margin-top: 1.5rem;
+    display: inline-block;
+    width: 100%;
+    padding: 1.25rem;
+    background-color: #ea4c40;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-order-btn:hover {
+    background-color: #ef6d6d;
+}

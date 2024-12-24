@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/css/checkoutForm.css">
+
+<div class="checkout-container">
+  <h1>Checkout</h1>
+
+  <form action="/submit-order" method="POST">
+    <div class="checkout-details">
+      <h3>Shipping Information</h3>
+
+      <div class="input-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="input-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <h3>Shipping Method</h3>
+      <div class="input-group">
+        <select id="shipping-method" name="shippingMethod" required>
+          <option value="Free Shipping" selected>Free Shipping (5-7 Days)</option>
+          <option value="Express Shipping">Express Shipping (1-2 Days, RS. 200)</option>
+        </select>
+      </div>
+
+      <h3>Payment Method</h3>
+      <div class="input-group">
+        <select id="payment-method" name="paymentMethod" required>
+          <option value="Cash on Delivery" selected>Cash on Delivery</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+      </div>
+
+      <div class="cart-summary">
+        <p><strong>Total Price: RS.<%= totalPrice %></strong></p>
+      </div>
+
+      <button type="submit" class="submit-order-btn">Submit Order</button>
+    </div>
+  </form>
+</div>

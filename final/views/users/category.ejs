@@ -1,0 +1,94 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f4f4f4; */
+  }
+  .category-title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .products {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .product-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .product-item {
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .product-item:hover {
+    transform: scale(1.05);
+  }
+
+  .product-image {
+    max-width: 100%;
+    height: 380px;
+    margin-bottom: 10px;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 1.1rem;
+    color: #e74c3c;
+    margin-bottom: 15px;
+  }
+
+  .no-products-message {
+    text-align: center;
+    color: #555;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+
+  a {
+  text-decoration: none;
+}
+
+</style>
+
+<h1 class="category-title">Products in <%= categoryName %></h1>
+
+<div class="products">
+  <% if (products && products.length > 0) { %>
+    <ul class="product-list">
+      <% products.forEach(product => { %>
+        <li class="product-item">
+          <!-- Link to product detail page -->
+          <a href="/product/<%= product._id %>">
+            <% if (product.image) { %>
+              <img class="product-image" src="<%= product.image %>" alt="<%= product.name %>">
+            <% } %>
+            <h2 class="product-name"><%= product.name %></h2>
+            <p class="product-price">RS.<%= product.price %></p>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="no-products-message">No products found in this category.</p>
+  <% } %>
+</div>

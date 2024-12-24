@@ -1,0 +1,22 @@
+<h1>Your Wishlist</h1>
+
+<% if (wishlist.length> 0) { %>
+    <ul>
+        <% wishlist.forEach(product=> { %>
+            <li>
+                <h2>
+                    <%= product.name %>
+                </h2>
+                <p>
+                    <%= product.description %>
+                </p>
+                <p>Price: $<%= product.price %>
+                </p>
+            </li>
+            <% }) %>
+    </ul>
+    <% } else { %>
+        <p>Your wishlist is empty.</p>
+        <% } %>
+
+            <a href="/">Back to Home</a>
