@@ -33,7 +33,7 @@ router.get('/wishlist', authenticateToken, async (req, res) => {
           return res.redirect('/');
       }
 
-      res.render('wishlist', { wishlist: user.wishlist }); // Render the wishlist view
+      res.render('users/wishlist', { wishlist: user.wishlist, layout: 'layouts/main', title: 'wishlist' }); // Render the wishlist view
   } catch (error) {
       console.error(error);
       req.flash('error', 'Error fetching your wishlist.');
