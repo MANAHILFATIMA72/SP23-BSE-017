@@ -1,0 +1,79 @@
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #b0b3b7;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .table {
+            background-color: #ffffff;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            max-width: 106px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .form-select {
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+        }
+    </style>
+    <div class="container">
+        <h1>Manage Orders</h1>
+
+        <% if (orders.length > 0) { %>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(order => { %>
+                            <tr>
+                                <td><%= order._id %></td>
+                                <td><%= order.user.name %></td>
+                                <td>RS.<%= order.totalPrice.toFixed(2) %></td>
+                                <td><%= order.status %></td>
+                                <td>
+                                    <form action="/admin/orders/<%= order._id %>/update-status" method="POST" class="d-flex align-items-center">
+                                        <select name="status" class="form-select me-2">
+                                            <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                            <option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                            <option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <p class="text-center">No orders found.</p>
+        <% } %>
+    </div>

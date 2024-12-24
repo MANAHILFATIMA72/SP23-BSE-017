@@ -1,6 +1,7 @@
 const express = require('express');
 const Product = require('../models/Products');
 const Category = require('../models/Category');
+const Order = require('../models/Order');
 const upload = require('../middleware/multer');
 const jwt = require('jsonwebtoken');
 const { optionalAuthenticateJWT, authorizeRole } = require('../middleware/auth');
@@ -212,5 +213,43 @@ router.get('/categories/delete/:id', authenticateToken, authorizeRole('admin'), 
 router.post('/logout', authenticateToken, (req, res) => {
     res.clearCookie('token').redirect('/');
 });
+
+// Route to display all orders
+router.get('/orders', authenticateToken, authorizeRole('admin'), async (req, res) => {
+    try {
+      // Fetch all orders from the database
+      const orders = await Order.find().populate('user'); // Assuming 'user' is a reference to the user model
+  
+      // Render the orders page
+      res.render('admin/orders', {
+        layout: "layouts/adminLayout",
+        title: 'Manage Orders',
+        orders,
+      });
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      req.flash('error', 'Error fetching orders.');
+      res.redirect('/admin'); // Redirect to dashboard if there's an error
+    }
+  });
+  
+ // Route to update order status (Admin only)
+router.post('/orders/:id/update-status', authenticateToken, authorizeRole('admin'), async (req, res) => {
+    try {
+      const { status } = req.body; // Extract the status from the form submission
+      const orderId = req.params.id; // Get the order ID from the URL parameters
+  
+      // Update the order status in the database
+      await Order.findByIdAndUpdate(orderId, { status });
+  
+      req.flash('success', 'Order status updated successfully.');
+      res.redirect('/admin/orders'); // Redirect to the orders page after the update
+    } catch (error) {
+      console.error('Error updating order status:', error);
+      req.flash('error', 'Failed to update order status.');
+      res.redirect('/admin/orders'); // Redirect to orders page if there's an error
+    }
+  });
+  
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
   user: {
     name: String,
     address: String,
@@ -12,8 +12,9 @@ const orderSchema = new mongoose.Schema({
   items: [
     {
       product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+        _id: mongoose.Schema.Types.ObjectId,
+        name: String,
+        price: Number,
       },
       quantity: Number,
     },
@@ -21,6 +22,7 @@ const orderSchema = new mongoose.Schema({
   totalPrice: Number,
   status: {
     type: String,
+    enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
     default: 'Pending',
   },
   date: {
@@ -29,4 +31,4 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('Order', OrderSchema);

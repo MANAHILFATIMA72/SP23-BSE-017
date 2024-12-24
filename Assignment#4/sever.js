@@ -82,6 +82,10 @@ app.get('/search', (req, res) => {
   res.render('users/search', { layout: 'layouts/main', title: "Search" });
 });
 
+app.get('/cart', (req, res) => {
+  res.render('users/cart', { layout: 'layouts/main', title: "Cart" });
+});
+
 app.get('/about', (req, res) => {
   res.render('users/about-us', { layout: 'layouts/main', title: "About-us" });
 });
